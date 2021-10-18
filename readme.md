@@ -1,9 +1,9 @@
-Olá! Bem-vindo ao meu projeto secreto!
+## Olá! Bem-vindo ao meu projeto secreto!
 
-###Objetivo Principal
+### Objetivo Principal
 Implementar a API da maneira mais simples que eu conseguisse.
 
-###Minha Idéia
+### Minha Idéia
 Optei por não utilizar nenhum framework para poder ter mais liberdade de mostrar a arquitetura que planejei. 
 Ainda assim utilizei duas bibliotecas de terceiros, uma para tratar das rotas e uma para tratar dos requests e responses.   
 
@@ -23,7 +23,7 @@ Assim, quando o controller é chamado no routes.php eu consigo usar o design pat
 
 Desta forma o código fica bem separado e, apesar de parecer mais complexo, fica mais fácil de fazer alterações em sua estrutura no futuro.
 
-###TODO List
+### TODO List
 
 Algumas coisas que eu gostaria de fazer mas não tive tempo:
 
