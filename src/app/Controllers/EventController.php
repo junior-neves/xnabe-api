@@ -5,6 +5,7 @@ namespace App\Controllers;
 
 use App\DTO\Event\EventDTO;
 use App\Exceptions\Account\AccountNotFoundException;
+use App\Mappers\Contracts\EventMapperInterface;
 use App\Services\Factories\EventFactory;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,11 +16,13 @@ class EventController
 
     protected JsonResponse $response;
     private EventFactory $eventFactory;
-    //
-    public function __construct(EventFactory $eventFactory)
+    private EventMapperInterface $eventMapper;
+
+    public function __construct(EventFactory $eventFactory, EventMapperInterface $eventMapper)
     {
         $this->response = new JsonResponse();
         $this->eventFactory = $eventFactory;
+        $this->eventMapper = $eventMapper;
     }
 
     public function handler(Request $request) : JsonResponse
@@ -31,17 +34,12 @@ class EventController
         $request = $request->toArray();
 
         //TODO: criar exceptiosn da account
-        //TODO: criar um mapper, recebe o request e volta o eventDTO
         //TODO: EventResponse no DTO / toArray
-        //tira a responsabilidade de fabricar do controller
 
         try {
+            $eventDTO = $this->eventMapper->map($request);
+
             $event = $this->eventFactory->factory($request['type']);
-            $eventDTO = (new EventDTO())
-                ->setType($request["type"] ?? null)
-                ->setAmount($request["amount"] ?? null)
-                ->setOrigin($request["origin"] ?? null)
-                ->setDestination($request["destination"] ?? null);
             $data = $event->execute($eventDTO);
 
             $this->response->setData($data);
