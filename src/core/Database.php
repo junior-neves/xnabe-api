@@ -29,7 +29,7 @@ class Database
             );
             $this->PDO->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            echo 'Erro :' . $e->getMessage();
+            echo 'Error :' . $e->getMessage();
         }
     }
 

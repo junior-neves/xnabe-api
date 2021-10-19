@@ -45,6 +45,6 @@ class EventFactoryTest extends TestCase
     {
         $this->expectException(EventFactoryNotAllowedException::class);
 
-        $factory = $this->eventFactory->factory('notAllowedEvent');
+        $this->eventFactory->factory('notAllowedEvent');
     }
 }

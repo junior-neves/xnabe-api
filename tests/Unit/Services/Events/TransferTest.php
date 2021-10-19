@@ -62,7 +62,7 @@ class TransferTest extends TestCase
         );
     }
 
-    public function testMakeTransferFromInexistentAccount()
+    public function testMakeTransferFromNonexistentAccount()
     {
         $this->accountRepository->expects($this->exactly(2))
             ->method('getOne')
@@ -84,7 +84,7 @@ class TransferTest extends TestCase
         $this->assertNull($dataReturn);
     }
 
-    public function testMakeTransferToInexistentAccount()
+    public function testMakeTransferToNonexistentAccount()
     {
         $this->accountRepository->expects($this->exactly(2))
             ->method('getOne')
@@ -106,7 +106,7 @@ class TransferTest extends TestCase
         $this->assertNull($dataReturn);
     }
 
-    public function testMakeTransferWithoutEnoughtMoney()
+    public function testMakeTransferWithoutEnoughMoney()
     {
         $this->accountRepository->expects($this->exactly(2))
             ->method('getOne')

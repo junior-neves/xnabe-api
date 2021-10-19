@@ -49,7 +49,7 @@ class WithdrawTest extends TestCase
         );
     }
 
-    public function testMakeWithdrawFromInexistentAccount()
+    public function testMakeWithdrawFromNonexistentAccount()
     {
         $this->accountRepository->method('getOne')->willReturn(null);
         $this->expectException(AccountNotFoundException::class);
@@ -62,7 +62,7 @@ class WithdrawTest extends TestCase
         $this->assertNull($dataReturn);
     }
 
-    public function testMakeWithdrawWithoutEnoughtMoney()
+    public function testMakeWithdrawWithoutEnoughMoney()
     {
         $this->accountRepository->method('getOne')->willReturn([
             'id' => 100,

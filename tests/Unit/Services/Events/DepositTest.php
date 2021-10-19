@@ -47,7 +47,7 @@ class DepositTest extends TestCase
         );
     }
 
-    public function testMakeDeposiToNewAccount()
+    public function testMakeDepositToNewAccount()
     {
         $this->accountRepository->expects($this->exactly(2))
             ->method('getOne')
