@@ -37,7 +37,7 @@ class AccountRepositoryPDO implements AccountRepositoryInterface
         if (!$rs) {
             return null;
         }
-        $rs["balance"] = (int)($rs["balance"]);
+        $rs["balance"] = (int)$rs["balance"];
         return $rs;
     }
 
