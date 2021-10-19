@@ -22,14 +22,3 @@ Relacionado a isso, eu criei duas classes auxiliares, a ServiceProvider e a Repo
 Assim, quando o controller é chamado no routes.php eu consigo usar o design pattern **Dependency Injection** e já chamar o controller com o Service instanciado (e o Service já vem com os Repositories instanciados também) 
 
 Desta forma o código fica bem separado e, apesar de parecer mais complexo, fica mais fácil de fazer alterações em sua estrutura no futuro.
-
-### TODO List
-
-Algumas coisas que eu gostaria de fazer mas não tive tempo:
-
-- Classe para validação dos dados (adicionaria essa validação em uma camada extra entre o Controller e o Service)
-- Testes
-- Factory Method para separar os tipos de eventos (deposit, withdraw, transfer)
-- Exceptions
-- Model para Account (assim eu não precisaria forçar a tipagem no metodo getAccount do EventService)
-
