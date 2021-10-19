@@ -2,6 +2,7 @@
 
 namespace App\Services\Factories;
 
+use App\Exceptions\Event\EventFactoryNotAllowedException;
 use App\Repositories\AccountRepositoryPDO;
 use App\Services\Contracts\EventInterface;
 use App\Services\Events\Deposit;
@@ -22,7 +23,7 @@ class EventFactory
         $accountRepository = new AccountRepositoryPDO();
 
         if ( ! array_key_exists($type,self::ALLOWED_EVENTS ) ) {
-            //exception
+            throw new EventFactoryNotAllowedException();
         }
 
         $eventClass = self::ALLOWED_EVENTS[$type];
