@@ -14,17 +14,17 @@ class AccountService implements AccountServiceInterface
         $this->accountRepository = $accountRepository;
     }
 
-    public function getBalance($account_id): ?int
+    public function getBalance($accountId): ?int
     {
-        if (!self::getAccount($account_id)) {
+        if (!self::getAccount($accountId)) {
             return null;
         }
 
-        return $this->accountRepository->getBalance($account_id);
+        return $this->accountRepository->getBalance($accountId);
     }
 
-    public function getAccount($account_id)
+    public function getAccount($accountId)
     {
-        return $this->accountRepository->getOne($account_id);
+        return $this->accountRepository->getOne($accountId);
     }
 }

@@ -20,8 +20,8 @@ class AccountController
 
     public function getBalance(Request $request): JsonResponse
     {
-        $account_id = $request->query->get("account_id");
-        $balance = $this->accountService->getBalance($account_id);
+        $accountId = $request->query->get("account_id");
+        $balance = $this->accountService->getBalance($accountId);
 
         if (is_null($balance)) {
             $this->response->setData(0);

@@ -13,39 +13,38 @@ class AccountRepositoryPDO implements AccountRepositoryInterface
     {
         $this->pdo = Database::getInstance();
     }
-//TODO: retirar o rs
-//TODO: mudar variaveis para camel case
-    public function create($account_id, $initial_balance): bool
+
+    public function create($accountId, $initialBalance): bool
     {
-        $rs = $this->pdo->prepare("INSERT INTO account (id, balance) VALUES (?, ?)");
-        $rs = $rs->execute([$account_id, $initial_balance]);
-        return $rs;
+        $result = $this->pdo->prepare("INSERT INTO account (id, balance) VALUES (?, ?)");
+        $result = $result->execute([$accountId, $initialBalance]);
+        return $result;
     }
 
-    public function updateBalance($account_id, $balance): bool
+    public function updateBalance($accountId, $balance): bool
     {
-        $rs = $this->pdo->prepare("UPDATE account SET balance = ? WHERE id = ?");
-        $rs = $rs->execute([$balance, $account_id]);
-        return $rs;
+        $result = $this->pdo->prepare("UPDATE account SET balance = ? WHERE id = ?");
+        $result = $result->execute([$balance, $accountId]);
+        return $result;
     }
 
-    public function getOne($account_id): ?array
+    public function getOne($accountId): ?array
     {
-        $rs = $this->pdo->prepare("SELECT * FROM account WHERE id = ?");
-        $rs->execute([$account_id]);
-        $rs = $rs->fetch();
-        if (!$rs) {
+        $result = $this->pdo->prepare("SELECT * FROM account WHERE id = ?");
+        $result->execute([$accountId]);
+        $result = $result->fetch();
+        if (!$result) {
             return null;
         }
-        $rs["balance"] = (int)$rs["balance"];
-        return $rs;
+        $result["balance"] = (int)$result["balance"];
+        return $result;
     }
 
-    public function getBalance($account_id): int
+    public function getBalance($accountId): int
     {
-        $rs = $this->pdo->prepare("SELECT balance FROM account WHERE id = ?");
-        $rs->execute([$account_id]);
-        $rs = $rs->fetch();
-        return $rs["balance"];
+        $result = $this->pdo->prepare("SELECT balance FROM account WHERE id = ?");
+        $result->execute([$accountId]);
+        $result = $result->fetch();
+        return $result["balance"];
     }
 }

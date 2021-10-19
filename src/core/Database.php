@@ -7,7 +7,7 @@ use PDO;
 class Database
 {
 
-    private ?\PDO $PDO = null;
+    private ?PDO $PDO = null;
 
     private static ?Database $instance = null;
 
@@ -20,7 +20,7 @@ class Database
     private function __construct()
     {
         try {
-            $this->PDO = new \PDO(
+            $this->PDO = new PDO(
                 'mysql:dbname=' . self::DATABASE . ';host=' . self::SQL_SERVER,
                 self::SQL_USER,
                 self::SQL_PASSWORD
@@ -28,7 +28,6 @@ class Database
             $this->PDO->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         } catch (\PDOException $e) {
             echo 'Erro :' . $e->getMessage();
-            die();
         }
     }
 
@@ -48,10 +47,5 @@ class Database
     public function query($sql): \PDOStatement
     {
         return $this->PDO->query($sql);
-    }
-
-    public function lastInsertId($sql): string
-    {
-        return $this->PDO->lastInsertId();
     }
 }

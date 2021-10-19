@@ -4,11 +4,11 @@ namespace App\Repositories\Contracts;
 
 interface AccountRepositoryInterface
 {
-    public function create($account_id, $initial_balance): bool;
+    public function create($accountId, $initialBalance): bool;
 
-    public function updateBalance($account_id, $balance): bool;
+    public function updateBalance($accountId, $balance): bool;
 
-    public function getOne($account_id): ?array;
+    public function getOne($accountId): ?array;
 
-    public function getBalance($account_id): int;
+    public function getBalance($accountId): int;
 }

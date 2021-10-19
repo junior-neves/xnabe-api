@@ -22,17 +22,17 @@ class Withdraw extends Event implements EventInterface
             throw new AccountNotFoundException();
         }
 
-        $new_balance = $account["balance"] - $event->getAmount();
-        if ($new_balance < 0) {
+        $newBalance = $account["balance"] - $event->getAmount();
+        if ($newBalance < 0) {
             throw new InsufficientBalanceException();
         }
 
-        $this->accountRepository->updateBalance($event->getOrigin(), $new_balance);
+        $this->accountRepository->updateBalance($event->getOrigin(), $newBalance);
 
 
         return ["origin" => [
             'id' => $event->getOrigin(),
-            'balance' => $new_balance
+            'balance' => $newBalance
         ]];
     }
 }

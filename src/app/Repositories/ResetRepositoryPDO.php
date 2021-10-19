@@ -16,13 +16,13 @@ class ResetRepositoryPDO implements ResetRepositoryInterface
 
     public function reset(): bool
     {
-        $rs = $this->pdo->prepare("DELETE FROM account WHERE 1");
-        return $rs->execute();
+        $result = $this->pdo->prepare("DELETE FROM account WHERE 1");
+        return $result->execute();
     }
 
     public function create(): bool
     {
-        $rs = $this->pdo->prepare("INSERT INTO account (id, balance) VALUES ('300', 0)");
-        return $rs->execute();
+        $result = $this->pdo->prepare("INSERT INTO account (id, balance) VALUES ('300', 0)");
+        return $result->execute();
     }
 }

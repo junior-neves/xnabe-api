@@ -17,30 +17,30 @@ class Transfer extends Event implements EventInterface
 
     public function execute(EventDTO $event): ?array
     {
-        $origin_account = $this->accountRepository->getOne($event->getOrigin());
-        $destination_account = $this->accountRepository->getOne($event->getDestination());
-        if ((!$origin_account) or (!$destination_account)) {
+        $originAccount = $this->accountRepository->getOne($event->getOrigin());
+        $destinationAccount = $this->accountRepository->getOne($event->getDestination());
+        if ((!$originAccount) or (!$destinationAccount)) {
             throw new AccountNotFoundException();
         }
 
-        $new_origin_balance = $origin_account["balance"] - $event->getAmount();
-        if ($new_origin_balance < 0) {
+        $newOriginBalance = $originAccount["balance"] - $event->getAmount();
+        if ($newOriginBalance < 0) {
             throw new InsufficientBalanceException();
         }
 
-        $new_destination_balance = $destination_account["balance"] + $event->getAmount();
+        $newDestinationBalance = $destinationAccount["balance"] + $event->getAmount();
         //TODO: transaction
-        $this->accountRepository->updateBalance($event->getOrigin(), $new_origin_balance);
-        $this->accountRepository->updateBalance($event->getDestination(), $new_destination_balance);
+        $this->accountRepository->updateBalance($event->getOrigin(), $newOriginBalance);
+        $this->accountRepository->updateBalance($event->getDestination(), $newDestinationBalance);
 
         return [
             "origin" => [
-                'id' => $origin_account["id"],
-                'balance' => $new_origin_balance
+                'id' => $originAccount["id"],
+                'balance' => $newOriginBalance
             ],
             "destination" => [
-                'id' => $destination_account['id'],
-                'balance' => $new_destination_balance
+                'id' => $destinationAccount['id'],
+                'balance' => $newDestinationBalance
             ]
         ];
     }

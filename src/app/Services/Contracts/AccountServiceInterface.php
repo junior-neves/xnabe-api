@@ -4,7 +4,7 @@ namespace App\Services\Contracts;
 
 interface AccountServiceInterface
 {
-    public function getBalance($account_id): ?int;
+    public function getBalance($accountId): ?int;
 
-    public function getAccount($account_id);
+    public function getAccount($accountId);
 }

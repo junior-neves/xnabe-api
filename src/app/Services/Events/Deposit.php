@@ -21,12 +21,12 @@ class Deposit extends Event implements EventInterface
             $account = $this->accountRepository->getOne($event->getDestination());
         }
 
-        $new_balance = $account["balance"] + $event->getAmount();
-        $this->accountRepository->updateBalance($event->getDestination(), $new_balance);
+        $newBalance = $account["balance"] + $event->getAmount();
+        $this->accountRepository->updateBalance($event->getDestination(), $newBalance);
 
         return ["destination" => [
             'id' => $event->getDestination(),
-            'balance' => $new_balance
+            'balance' => $newBalance
         ]];
     }
 }
