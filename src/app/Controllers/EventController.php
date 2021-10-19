@@ -6,6 +6,7 @@ namespace App\Controllers;
 use App\DTO\Event\EventDTO;
 use App\Exceptions\Account\AccountNotFoundException;
 use App\Exceptions\Account\InsufficientBalanceException;
+use App\Exceptions\Event\EventFactoryNotAllowedException;
 use App\Mappers\Contracts\EventMapperInterface;
 use App\Services\Factories\EventFactory;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -34,9 +35,6 @@ class EventController
         }
         $request = $request->toArray();
 
-        //TODO: criar exceptiosn da account
-        //TODO: EventResponse no DTO / toArray
-
         try {
             $eventDTO = $this->eventMapper->map($request);
 
@@ -45,7 +43,11 @@ class EventController
 
             $this->response->setData($data);
             return $this->response->setStatusCode(Response::HTTP_CREATED);
-        } catch (AccountNotFoundException|InsufficientBalanceException) {
+        } catch (
+            AccountNotFoundException|
+            InsufficientBalanceException|
+            EventFactoryNotAllowedException
+        ) {
             $this->response->setData(0);
             return $this->response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
