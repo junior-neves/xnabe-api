@@ -23,7 +23,7 @@ class AccountService implements AccountServiceInterface
         return $this->accountRepository->getBalance($accountId);
     }
 
-    public function getAccount($accountId)
+    public function getAccount($accountId): array
     {
         return $this->accountRepository->getOne($accountId);
     }
