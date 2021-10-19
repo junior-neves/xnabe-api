@@ -10,7 +10,7 @@ class ServiceProvider
             "App\Services\AccountService"
         ],
         "App\Controllers\EventController" => [
-            "App\Services\EventService"
+            "App\Services\Factories\EventFactory"
         ],
         "App\Controllers\ResetController" => [
             "App\Services\ResetService"

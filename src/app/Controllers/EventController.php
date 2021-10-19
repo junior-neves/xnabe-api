@@ -3,7 +3,9 @@
 namespace App\Controllers;
 
 
-use App\Services\Contracts\EventServiceInterface;
+use App\DTO\Event\EventDTO;
+use App\Exceptions\Account\AccountNotFoundException;
+use App\Services\Factories\EventFactory;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,52 +14,43 @@ class EventController
 {
 
     protected JsonResponse $response;
-    private EventServiceInterface $eventService;
-
-    public function __construct(EventServiceInterface $eventService)
+    private EventFactory $eventFactory;
+    //
+    public function __construct(EventFactory $eventFactory)
     {
         $this->response = new JsonResponse();
-        $this->eventService = $eventService;
+        $this->eventFactory = $eventFactory;
     }
 
     public function handler(Request $request) : JsonResponse
     {
-
         if (!$request->getContent()) {
             $this->response->setData(["Error" => "Empty json"]);
             return $this->response->setStatusCode(Response::HTTP_BAD_REQUEST);
         }
         $request = $request->toArray();
 
-        if ($request['type'] == "deposit") {
-            $data = $this->eventService->makeDeposit($request['destination'], $request['amount']);
-            $this->response->setData($data);
-            return $this->response->setStatusCode(Response::HTTP_CREATED);
-        }
+        //TODO: criar exceptiosn da account
+        //TODO: criar um mapper, recebe o request e volta o eventDTO
+        //TODO: EventResponse no DTO / toArray
+        //tira a responsabilidade de fabricar do controller
 
-        if ($request['type'] == "withdraw") {
-            $data = $this->eventService->makeWithdraw($request['origin'], $request['amount']);
-            if (is_null($data)) {
-                $this->response->setData(0);
-                return $this->response->setStatusCode(Response::HTTP_NOT_FOUND);
-            }
-
-            $this->response->setData($data);
-            return $this->response->setStatusCode(Response::HTTP_CREATED);
-        }
-
-        if ($request['type'] == "transfer") {
-            $data = $this->eventService->makeTransfer($request['origin'], $request['destination'], $request['amount']);
-            if (is_null($data)) {
-                $this->response->setData(0);
-                return $this->response->setStatusCode(Response::HTTP_NOT_FOUND);
-            }
+        try {
+            $event = $this->eventFactory->factory($request['type']);
+            $eventDTO = (new EventDTO())
+                ->setType($request["type"] ?? null)
+                ->setAmount($request["amount"] ?? null)
+                ->setOrigin($request["origin"] ?? null)
+                ->setDestination($request["destination"] ?? null);
+            $data = $event->execute($eventDTO);
 
             $this->response->setData($data);
             return $this->response->setStatusCode(Response::HTTP_CREATED);
+        } catch (AccountNotFoundException $error ) {
+            $this->response->setData([$error->getMessage()]);
+            return $this->response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
 
-        return $this->response->setStatusCode(Response::HTTP_NOT_FOUND);
     }
 
 }
