@@ -6,5 +6,5 @@ use App\DTO\Event\EventDTO;
 
 interface EventMapperInterface
 {
-    public function map(array $dados): EventDTO;
+    public function map(array $data): EventDTO;
 }
