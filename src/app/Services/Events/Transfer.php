@@ -3,6 +3,8 @@
 namespace App\Services\Events;
 
 use App\DTO\Event\EventDTO;
+use App\Exceptions\Account\AccountNotFoundException;
+use App\Exceptions\Account\InsufficientBalanceException;
 use App\Repositories\Contracts\AccountRepositoryInterface;
 use App\Services\Contracts\EventInterface;
 
@@ -20,12 +22,12 @@ class Transfer extends Event implements EventInterface
         $origin_account = $this->accountRepository->getOne($event->getOrigin());
         $destination_account = $this->accountRepository->getOne($event->getDestination());
         if ((!$origin_account) OR (!$destination_account)) {
-            return null;
+            throw new AccountNotFoundException();
         }
 
         $new_origin_balance = $origin_account["balance"] - $event->getAmount();
         if ($new_origin_balance < 0) {
-            return null;
+            throw new InsufficientBalanceException();
         }
 
         $new_destination_balance = $destination_account["balance"] + $event->getAmount();

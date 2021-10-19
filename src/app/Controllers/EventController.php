@@ -5,6 +5,7 @@ namespace App\Controllers;
 
 use App\DTO\Event\EventDTO;
 use App\Exceptions\Account\AccountNotFoundException;
+use App\Exceptions\Account\InsufficientBalanceException;
 use App\Mappers\Contracts\EventMapperInterface;
 use App\Services\Factories\EventFactory;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -44,8 +45,8 @@ class EventController
 
             $this->response->setData($data);
             return $this->response->setStatusCode(Response::HTTP_CREATED);
-        } catch (AccountNotFoundException $error ) {
-            $this->response->setData([$error->getMessage()]);
+        } catch (AccountNotFoundException|InsufficientBalanceException) {
+            $this->response->setData(0);
             return $this->response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
 
