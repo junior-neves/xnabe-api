@@ -1,6 +1,6 @@
 <?php
 
-namespace Unit;
+namespace Unit\Services;
 
 use App\Repositories\Contracts\AccountRepositoryInterface;
 use App\Services\AccountService;
