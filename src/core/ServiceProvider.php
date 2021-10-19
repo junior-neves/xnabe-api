@@ -5,7 +5,7 @@ namespace Core;
 class ServiceProvider
 {
 
-    public static $services = [
+    public static array $services = [
         "App\Controllers\AccountController" => [
             "App\Services\AccountService"
         ],

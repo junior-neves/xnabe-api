@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class AccountServiceTest extends TestCase
 {
-    private $accountRepository;
+    private AccountRepositoryInterface $accountRepository;
 
     public function __construct($name = null, array $data = [], $dataName = '')
     {

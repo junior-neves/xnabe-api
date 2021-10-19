@@ -5,7 +5,7 @@ namespace Core;
 class RepositoryProvider
 {
 
-    public static $repositories = [
+    public static array $repositories = [
         "App\Services\AccountService" => [
             "App\Repositories\AccountRepositoryPDO"
         ],
