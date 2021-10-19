@@ -17,15 +17,13 @@ class AccountRepositoryPDO implements AccountRepositoryInterface
     public function create($accountId, $initialBalance): bool
     {
         $result = $this->pdo->prepare("INSERT INTO account (id, balance) VALUES (?, ?)");
-        $result = $result->execute([$accountId, $initialBalance]);
-        return $result;
+        return $result->execute([$accountId, $initialBalance]);
     }
 
     public function updateBalance($accountId, $balance): bool
     {
         $result = $this->pdo->prepare("UPDATE account SET balance = ? WHERE id = ?");
-        $result = $result->execute([$balance, $accountId]);
-        return $result;
+        return $result->execute([$balance, $accountId]);
     }
 
     public function getOne($accountId): ?array

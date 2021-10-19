@@ -17,6 +17,5 @@ class ResetService
     {
         $this->resetRepository->reset();
         $this->resetRepository->create();
-        return;
     }
 }
