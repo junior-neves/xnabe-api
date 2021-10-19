@@ -10,18 +10,16 @@ use App\Services\Contracts\EventInterface;
 
 class Transfer extends Event implements EventInterface
 {
-
     public function __construct(AccountRepositoryInterface $accountRepository)
     {
         parent::__construct($accountRepository);
     }
 
-
     public function execute(EventDTO $event): ?array
     {
         $origin_account = $this->accountRepository->getOne($event->getOrigin());
         $destination_account = $this->accountRepository->getOne($event->getDestination());
-        if ((!$origin_account) OR (!$destination_account)) {
+        if ((!$origin_account) or (!$destination_account)) {
             throw new AccountNotFoundException();
         }
 

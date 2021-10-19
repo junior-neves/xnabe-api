@@ -8,12 +8,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 $request = Request::createFromGlobals();
 
-$dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
 
     $r->post('/reset', ['App\Controllers\ResetController', 'reset']);
     $r->get('/balance', ['App\Controllers\AccountController', 'getBalance']);
     $r->post('/event', ['App\Controllers\EventController', 'handler']);
-
 });
 
 
@@ -63,4 +62,3 @@ switch ($routeInfo[0]) {
         $response->send();
         break;
 }
-

@@ -42,7 +42,9 @@ class DepositTest extends TestCase
                     'id' => 100,
                     'balance' => 20
                 ]
-            ],$dataReturn);
+            ],
+            $dataReturn
+        );
     }
 
     public function testMakeDeposiToNewAccount()
@@ -70,7 +72,8 @@ class DepositTest extends TestCase
                     'id' => 100,
                     'balance' => 10
                 ]
-            ],$dataReturn);
+            ],
+            $dataReturn
+        );
     }
-
 }

@@ -80,6 +80,4 @@ class EventDTO
         $this->amount = $amount;
         return $this;
     }
-
-
 }

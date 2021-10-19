@@ -14,7 +14,7 @@ class AccountService implements AccountServiceInterface
         $this->accountRepository = $accountRepository;
     }
 
-    public function getBalance($account_id) : ?int
+    public function getBalance($account_id): ?int
     {
         if (!self::getAccount($account_id)) {
             return null;
@@ -27,5 +27,4 @@ class AccountService implements AccountServiceInterface
     {
         return $this->accountRepository->getOne($account_id);
     }
-
 }

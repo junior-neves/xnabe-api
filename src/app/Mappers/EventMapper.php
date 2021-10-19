@@ -17,5 +17,4 @@ class EventMapper implements EventMapperInterface
             ->setDestination($data["destination"] ?? null);
         return $eventDTO;
     }
-
 }

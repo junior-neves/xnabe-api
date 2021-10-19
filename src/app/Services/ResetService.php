@@ -13,11 +13,10 @@ class ResetService
         $this->resetRepository = $resetRepository;
     }
 
-    public function reset() : void
+    public function reset(): void
     {
         $this->resetRepository->reset();
         $this->resetRepository->create();
         return;
     }
-
 }

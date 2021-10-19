@@ -7,6 +7,5 @@ use App\DTO\Event\EventDTO;
 interface EventInterface
 {
 
-    public function execute(EventDTO $event) : ?array;
-
+    public function execute(EventDTO $event): ?array;
 }

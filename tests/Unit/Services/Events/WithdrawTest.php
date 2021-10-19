@@ -44,7 +44,9 @@ class WithdrawTest extends TestCase
                     'id' => 100,
                     'balance' => 0
                 ]
-            ],$dataReturn);
+            ],
+            $dataReturn
+        );
     }
 
     public function testMakeWithdrawFromInexistentAccount()
@@ -75,5 +77,4 @@ class WithdrawTest extends TestCase
 
         $this->assertNull($dataReturn);
     }
-
 }

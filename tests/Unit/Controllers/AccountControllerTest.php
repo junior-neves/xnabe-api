@@ -36,7 +36,6 @@ class AccountControllerTest extends TestCase
 
         $dataReturn = $this->accountController->getBalance($this->request);
 
-        $this->assertEquals($this->response,$dataReturn);
+        $this->assertEquals($this->response, $dataReturn);
     }
-
 }

@@ -58,7 +58,9 @@ class TransferTest extends TestCase
                     'id' => 200,
                     'balance' => 10
                 ]
-            ],$dataReturn);
+            ],
+            $dataReturn
+        );
     }
 
     public function testMakeTransferFromInexistentAccount()
@@ -91,7 +93,8 @@ class TransferTest extends TestCase
                 [
                     'id' => 100,
                     'balance' => 20
-                ],null
+                ],
+                null
             );
         $this->expectException(AccountNotFoundException::class);
 
@@ -128,5 +131,4 @@ class TransferTest extends TestCase
 
         $this->assertNull($dataReturn);
     }
-
 }

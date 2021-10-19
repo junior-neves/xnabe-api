@@ -33,7 +33,6 @@ class ResetControllerTest extends TestCase
 
         $dataReturn = $this->resetController->reset($this->request);
 
-        $this->assertEquals($this->response,$dataReturn);
+        $this->assertEquals($this->response, $dataReturn);
     }
-
 }

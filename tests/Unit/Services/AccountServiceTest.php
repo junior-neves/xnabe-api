@@ -31,8 +31,9 @@ class AccountServiceTest extends TestCase
             [
                 'id' => 100,
                 'balance' => 15
-            ]
-            ,$dataReturn);
+            ],
+            $dataReturn
+        );
     }
 
     public function testGetBalance()
@@ -50,7 +51,6 @@ class AccountServiceTest extends TestCase
         $accountService = new AccountService($accountRepository);
         $dataReturn = $accountService->getBalance(100);
 
-        $this->assertEquals(15,$dataReturn);
+        $this->assertEquals(15, $dataReturn);
     }
-
 }

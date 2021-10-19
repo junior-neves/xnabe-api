@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ResetController
 {
-
     protected JsonResponse $response;
     private ResetService $resetService;
 
@@ -18,7 +17,7 @@ class ResetController
         $this->resetService = $resetService;
     }
 
-    public function reset(Request $request) : JsonResponse
+    public function reset(Request $request): JsonResponse
     {
         $this->resetService->reset();
         $this->response->setContent("OK");
@@ -26,5 +25,4 @@ class ResetController
 
         return $this->response;
     }
-
 }

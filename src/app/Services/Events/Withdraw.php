@@ -10,7 +10,6 @@ use App\Services\Contracts\EventInterface;
 
 class Withdraw extends Event implements EventInterface
 {
-
     public function __construct(AccountRepositoryInterface $accountRepository)
     {
         parent::__construct($accountRepository);

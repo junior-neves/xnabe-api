@@ -16,5 +16,4 @@ class RepositoryProvider
             "App\Repositories\ResetRepositoryPDO"
         ]
     ];
-
 }

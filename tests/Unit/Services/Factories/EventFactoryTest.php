@@ -24,21 +24,21 @@ class EventFactoryTest extends TestCase
     {
         $factory = $this->eventFactory->factory('deposit');
 
-        $this->assertInstanceOf(Deposit::class,$factory);
+        $this->assertInstanceOf(Deposit::class, $factory);
     }
 
     public function testGetWithdrawEventClass()
     {
         $factory = $this->eventFactory->factory('withdraw');
 
-        $this->assertInstanceOf(Withdraw::class,$factory);
+        $this->assertInstanceOf(Withdraw::class, $factory);
     }
 
     public function testGetTransferEventClass()
     {
         $factory = $this->eventFactory->factory('transfer');
 
-        $this->assertInstanceOf(Transfer::class,$factory);
+        $this->assertInstanceOf(Transfer::class, $factory);
     }
 
     public function testGetNotAllowedEventClass()
@@ -47,5 +47,4 @@ class EventFactoryTest extends TestCase
 
         $factory = $this->eventFactory->factory('notAllowedEvent');
     }
-
 }

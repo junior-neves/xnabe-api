@@ -8,12 +8,10 @@ use App\Services\Contracts\EventInterface;
 
 class Deposit extends Event implements EventInterface
 {
-
     public function __construct(AccountRepositoryInterface $accountRepository)
     {
         parent::__construct($accountRepository);
     }
-
 
     public function execute(EventDTO $event): array
     {
@@ -31,5 +29,4 @@ class Deposit extends Event implements EventInterface
             'balance' => $new_balance
         ]];
     }
-
 }

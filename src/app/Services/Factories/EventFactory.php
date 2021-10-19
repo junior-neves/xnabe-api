@@ -17,18 +17,16 @@ class EventFactory
         "transfer" => Transfer::class
     ];
 
-    public function factory(string $type) : EventInterface
+    public function factory(string $type): EventInterface
     {
 
         $accountRepository = new AccountRepositoryPDO();
 
-        if ( ! array_key_exists($type,self::ALLOWED_EVENTS ) ) {
+        if (! array_key_exists($type, self::ALLOWED_EVENTS)) {
             throw new EventFactoryNotAllowedException();
         }
 
         $eventClass = self::ALLOWED_EVENTS[$type];
         return new $eventClass($accountRepository);
-
     }
-
 }

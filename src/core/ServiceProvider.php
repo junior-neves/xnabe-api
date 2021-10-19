@@ -17,5 +17,4 @@ class ServiceProvider
             "App\Services\ResetService"
         ],
     ];
-
 }

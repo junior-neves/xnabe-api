@@ -32,11 +32,11 @@ class EventControllerTest extends TestCase
         $this->request = new Request();
         $this->response = new JsonResponse();
 
-        $this->request->initialize([],[
+        $this->request->initialize([], [
             'type' => 'deposit',
             'destination' => 100,
             'amount' => 10
-        ],[],[],[],[],'{"type":"deposit", "destination":"100", "amount":10}');
+        ], [], [], [], [], '{"type":"deposit", "destination":"100", "amount":10}');
     }
 
     public function testHandler()
@@ -57,15 +57,17 @@ class EventControllerTest extends TestCase
                         'id' => 100,
                         'balance' => 20
                     ]
-                ])
+                ]
+            )
             ->setStatusCode(Response::HTTP_CREATED);
 
         $dataReturn = $this->eventController->handler($this->request);
 
-        $this->assertEquals($this->response,$dataReturn);
+        $this->assertEquals($this->response, $dataReturn);
     }
 
-    public function testHandlerWithError() {
+    public function testHandlerWithError()
+    {
         $this->eventMapper->method('map')->willReturn(new EventDTO());
         $this->eventFactory->method('factory')
             ->will($this->throwException(new AccountNotFoundException()));
@@ -76,7 +78,6 @@ class EventControllerTest extends TestCase
 
         $dataReturn = $this->eventController->handler($this->request);
 
-        $this->assertEquals($this->response,$dataReturn);
+        $this->assertEquals($this->response, $dataReturn);
     }
-
 }
