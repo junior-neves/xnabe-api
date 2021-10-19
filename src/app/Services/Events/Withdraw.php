@@ -15,6 +15,10 @@ class Withdraw extends Event implements EventInterface
         parent::__construct($accountRepository);
     }
 
+    /**
+     * @throws AccountNotFoundException
+     * @throws InsufficientBalanceException
+     */
     public function execute(EventDTO $event): ?array
     {
         $account = $this->accountRepository->getOne($event->getOrigin());

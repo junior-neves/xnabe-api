@@ -17,6 +17,9 @@ class EventFactory
         "transfer" => Transfer::class
     ];
 
+    /**
+     * @throws EventFactoryNotAllowedException
+     */
     public function factory(string $type): EventInterface
     {
 
