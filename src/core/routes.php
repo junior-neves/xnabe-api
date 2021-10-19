@@ -36,19 +36,24 @@ switch ($routeInfo[0]) {
         $controller = $routeInfo[1][0];
         $method = $routeInfo[1][1];
 
+
         $controller_services = [];
         $services_list = ServiceProvider::$services;
         $repositories_list = RepositoryProvider::$repositories;
 
-        foreach($services_list["{$controller}"] as $service_name) {
-            $service_repositories = [];
+        if (isset($services_list["{$controller}"])) {
+            foreach ($services_list["{$controller}"] as $service_name) {
+                $service_repositories = [];
 
-            foreach($repositories_list["{$service_name}"] as $repository_name) {
-                $repository = new $repository_name();
-                $service_repositories[] = $repository;
+                if (isset($repositories_list["{$service_name}"])) {
+                    foreach ($repositories_list["{$service_name}"] as $repository_name) {
+                        $repository = new $repository_name();
+                        $service_repositories[] = $repository;
+                    }
+                }
+
+                $controller_services[] = new $service_name(...$service_repositories);
             }
-
-            $controller_services[] = new $service_name(...$service_repositories);
         }
 
         $controller = new $controller(...$controller_services);
