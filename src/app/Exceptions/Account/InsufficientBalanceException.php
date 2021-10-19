@@ -2,7 +2,9 @@
 
 namespace App\Exceptions\Account;
 
-class InsufficientBalanceException extends \Exception
+use Exception;
+
+class InsufficientBalanceException extends Exception
 {
 
 }

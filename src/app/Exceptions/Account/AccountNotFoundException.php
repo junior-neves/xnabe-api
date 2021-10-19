@@ -2,7 +2,9 @@
 
 namespace App\Exceptions\Account;
 
-class AccountNotFoundException extends \Exception
+use Exception;
+
+class AccountNotFoundException extends Exception
 {
 
 }

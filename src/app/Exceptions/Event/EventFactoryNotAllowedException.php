@@ -2,7 +2,9 @@
 
 namespace App\Exceptions\Event;
 
-class EventFactoryNotAllowedException extends \Exception
+use Exception;
+
+class EventFactoryNotAllowedException extends Exception
 {
 
 }

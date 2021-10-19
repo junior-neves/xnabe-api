@@ -3,6 +3,8 @@
 namespace Core;
 
 use PDO;
+use PDOException;
+use PDOStatement;
 
 class Database
 {
@@ -26,7 +28,7 @@ class Database
                 self::SQL_PASSWORD
             );
             $this->PDO->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             echo 'Erro :' . $e->getMessage();
         }
     }
@@ -39,12 +41,12 @@ class Database
         return self::$instance;
     }
 
-    public function prepare($sql): \PDOStatement
+    public function prepare($sql): PDOStatement
     {
         return $this->PDO->prepare($sql);
     }
 
-    public function query($sql): \PDOStatement
+    public function query($sql): PDOStatement
     {
         return $this->PDO->query($sql);
     }
