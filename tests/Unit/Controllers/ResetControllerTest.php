@@ -2,9 +2,7 @@
 
 namespace Unit\Controllers;
 
-use App\Controllers\AccountController;
 use App\Controllers\ResetController;
-use App\Services\Contracts\AccountServiceInterface;
 use App\Services\ResetService;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\JsonResponse;

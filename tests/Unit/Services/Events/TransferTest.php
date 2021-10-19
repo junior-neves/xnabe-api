@@ -8,7 +8,6 @@ use App\Mappers\Contracts\EventMapperInterface;
 use App\Mappers\EventMapper;
 use App\Repositories\Contracts\AccountRepositoryInterface;
 use App\Services\Contracts\EventInterface;
-use App\Services\Events\Deposit;
 use App\Services\Events\Transfer;
 use PHPUnit\Framework\TestCase;
 

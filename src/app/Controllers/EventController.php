@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\DTO\Event\EventDTO;
 use App\Exceptions\Account\AccountNotFoundException;
 use App\Exceptions\Account\InsufficientBalanceException;
 use App\Exceptions\Event\EventFactoryNotAllowedException;
