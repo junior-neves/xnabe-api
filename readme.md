@@ -1,24 +1,59 @@
-## Olá! Bem-vindo ao meu projeto secreto!
+# XNABE API 
 
-### Objetivo Principal
-Implementar a API da maneira mais simples que eu conseguisse.
+Hi! I'm Junior, a PHP developer and welcome to my secret project!
 
-### Minha Idéia
-Optei por não utilizar nenhum framework para poder ter mais liberdade de mostrar a arquitetura que planejei. 
-Ainda assim utilizei duas bibliotecas de terceiros, uma para tratar das rotas e uma para tratar dos requests e responses.   
+## Main Goal
 
-O fluxo dos dados da API é:
+Implement the xnabe API as simple as I could
+
+## The Project Architecture 
+
+I decided not to use any framework in order to have more freedom to show the architecture I planned in a more raw way.
+
+Still, I used some third-party libraries to help me out.
+
+- [FastRoute](https://github.com/nikic/FastRoute) to handle routes.
+- [Symfony HttpFoundation](https://symfony.com/doc/current/components/http_foundation.html) handle http requests and responses
+- [PHPUnit](https://github.com/sebastianbergmann/phpunit) to test code
+
+My main focus was to decouple the layers of the system, so it could scale better and be safely maintained in the future.
+
+For that I used the Repository-Service design pattern. The API data flow is:
+
 > routes.php > Controller > Service > Repository > Database
 
-Meu foco principal foi desacoplar as camadas do sistema para que ele pudesse escalar e ter manutenção de forma segura no futuro.
-Para isso eu utilizei o design pattern **Repository-Service**. Nele, a regra de negócio fica apenas dentro do **Service** e a conexão com o banco fica apenas no **Repository**.
+I will let to give the full explanation of the code in the technical interview.
 
-Assim, caso precisássemos substituir o formato de banco atual (que é uma conexão Mysql via PDO), o Service não precisaria de nenhuma alteração.
+### Patterns
 
-Tanto os Services quanto os Repositories possuem **Interfaces** (contracts) para que as novas implementações sigam os mesmos padrões e também para que o conceito de **Inversão de Dependência** do SOLID seja seguido.
-Por conta dele, tanto o Controller quanto o Service dependem apenas de interfaces, e não de objetos instanciados.
+Some design patterns used:
 
-Relacionado a isso, eu criei duas classes auxiliares, a ServiceProvider e a RepositoryProvider. Elas possuem uma lista de quais controllers-services-repositories precisam um do outro.
-Assim, quando o controller é chamado no routes.php eu consigo usar o design pattern **Dependency Injection** e já chamar o controller com o Service instanciado (e o Service já vem com os Repositories instanciados também) 
+- Repository-Service Pattern
+- Dependency Injection
+- Factory Method
+- Data Transfer Object (DTO)
+- Data Mapper
+- Singleton
 
-Desta forma o código fica bem separado e, apesar de parecer mais complexo, fica mais fácil de fazer alterações em sua estrutura no futuro.
+### Code Quality
+
+To ensure code quality I used the following tools:
+
+[PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer): Used to verify and apply the PSR12 standards.
+
+    phpcs --standard=PSR12 /src
+    phpcbf --standard=PSR12 /src
+
+[PHP Mess Detector](https://github.com/phpmd/phpmd): Used to check potential problems with the code.
+
+    phpmd src ansi cleancode,codesize,controversial,design,naming,unusedcode
+    
+[PhpStorm Code Inspections](https://www.jetbrains.com/help/phpstorm/code-inspection.html): Used to clean the code detecting unused imports, dead code, redundant variables, spelling problems and improve the overall code structure.
+
+[SOLID Principles](https://en.wikipedia.org/wiki/SOLID): It's not a tool, but the code was written with these principles in mind.
+
+## Thank you
+
+Thanks for your time viewing my code. I look forward to talking with you guys.
+
+[`#ItsPossible`](https://github.com/junior-neves/xnabe-api/)
