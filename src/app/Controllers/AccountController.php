@@ -7,14 +7,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class AccountController
+class AccountController extends BaseController
 {
-    protected JsonResponse $response;
     private AccountServiceInterface $accountService;
 
     public function __construct(AccountServiceInterface $accountService)
     {
-        $this->response = new JsonResponse();
+        parent::__construct();
         $this->accountService = $accountService;
     }
 

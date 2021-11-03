@@ -11,15 +11,14 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class EventController
+class EventController extends BaseController
 {
-    protected JsonResponse $response;
     private EventFactory $eventFactory;
     private EventMapperInterface $eventMapper;
 
     public function __construct(EventFactory $eventFactory, EventMapperInterface $eventMapper)
     {
-        $this->response = new JsonResponse();
+        parent::__construct();
         $this->eventFactory = $eventFactory;
         $this->eventMapper = $eventMapper;
     }

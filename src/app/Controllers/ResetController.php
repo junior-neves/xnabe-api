@@ -6,14 +6,13 @@ use App\Services\ResetService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class ResetController
+class ResetController extends BaseController
 {
-    protected JsonResponse $response;
     private ResetService $resetService;
 
     public function __construct(ResetService $resetService)
     {
-        $this->response = new JsonResponse();
+        parent::__construct();
         $this->resetService = $resetService;
     }
 
