@@ -36,9 +36,9 @@ class EventController
             $eventDTO = $this->eventMapper->map($request);
 
             $event = $this->eventFactory->factory($request['type']);
-            $data = $event->execute($eventDTO);
+            $eventReturn = $event->execute($eventDTO);
 
-            $this->response->setData($data);
+            $this->response->setData($eventReturn->toArray());
             return $this->response->setStatusCode(Response::HTTP_CREATED);
         } catch (
             AccountNotFoundException |

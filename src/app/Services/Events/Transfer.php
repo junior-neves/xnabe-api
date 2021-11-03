@@ -2,7 +2,9 @@
 
 namespace App\Services\Events;
 
+use App\DTO\Account\AccountDTO;
 use App\DTO\Event\EventDTO;
+use App\DTO\Event\EventReturnDTO;
 use App\Exceptions\Account\AccountNotFoundException;
 use App\Exceptions\Account\InsufficientBalanceException;
 use App\Repositories\Contracts\AccountRepositoryInterface;
@@ -19,7 +21,7 @@ class Transfer extends Event implements EventInterface
      * @throws AccountNotFoundException
      * @throws InsufficientBalanceException
      */
-    public function execute(EventDTO $event): ?array
+    public function execute(EventDTO $event): ?EventReturnDTO
     {
         $originAccount = $this->accountRepository->getOne($event->getOrigin());
         $destinationAccount = $this->accountRepository->getOne($event->getDestination());
@@ -33,19 +35,20 @@ class Transfer extends Event implements EventInterface
         }
 
         $newDestinationBalance = $destinationAccount["balance"] + $event->getAmount();
-        //TODO: transaction
+
         $this->accountRepository->updateBalance($event->getOrigin(), $newOriginBalance);
         $this->accountRepository->updateBalance($event->getDestination(), $newDestinationBalance);
 
-        return [
-            "origin" => [
-                'id' => $originAccount["id"],
-                'balance' => $newOriginBalance
-            ],
-            "destination" => [
-                'id' => $destinationAccount['id'],
-                'balance' => $newDestinationBalance
-            ]
-        ];
+        $origin = (new AccountDTO())
+            ->setId($event->getOrigin())
+            ->setBalance($newOriginBalance);
+
+        $destination = (new AccountDTO())
+            ->setId($event->getDestination())
+            ->setBalance($newDestinationBalance);
+
+        return (new EventReturnDTO())
+            ->setOrigin($origin)
+            ->setDestination($destination);
     }
 }
