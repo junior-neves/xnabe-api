@@ -2,6 +2,8 @@
 
 namespace Unit\Services\Events;
 
+use App\DTO\Account\AccountDTO;
+use App\DTO\Event\EventReturnDTO;
 use App\Mappers\Contracts\EventMapperInterface;
 use App\Mappers\EventMapper;
 use App\Repositories\Contracts\AccountRepositoryInterface;
@@ -26,23 +28,22 @@ class DepositTest extends TestCase
     public function testMakeDeposit()
     {
         $this->accountRepository->method('getOne')->willReturn([
-            'id' => 100,
+            'id' => "100",
             'balance' => 10]);
         $this->accountRepository->method('create')->willReturn(true);
         $this->accountRepository->method('updateBalance')->willReturn(true);
 
         $eventDTO = $this->eventMapper->map([
-            'destination' => 100,
+            'destination' => "100",
             'amount' => 10]);
         $dataReturn = $this->eventService->execute($eventDTO);
 
         $this->assertEquals(
-            [
-                'destination' => [
-                    'id' => 100,
-                    'balance' => 20
-                ]
-            ],
+            (new EventReturnDTO())
+                ->setDestination(
+                    (new AccountDTO())
+                        ->setId("100")
+                        ->setBalance(20)),
             $dataReturn
         );
     }
@@ -54,7 +55,7 @@ class DepositTest extends TestCase
             ->willReturnOnConsecutiveCalls(
                 null,
                 [
-                    'id' => 100,
+                    'id' => "100",
                     'balance' => 0
                 ],
             );
@@ -62,17 +63,16 @@ class DepositTest extends TestCase
         $this->accountRepository->method('updateBalance')->willReturn(true);
 
         $eventDTO = $this->eventMapper->map([
-            'destination' => 100,
+            'destination' => "100",
             'amount' => 10]);
         $dataReturn = $this->eventService->execute($eventDTO);
 
         $this->assertEquals(
-            [
-                'destination' => [
-                    'id' => 100,
-                    'balance' => 10
-                ]
-            ],
+            (new EventReturnDTO())
+                ->setDestination(
+                    (new AccountDTO())
+                        ->setId("100")
+                        ->setBalance(10)),
             $dataReturn
         );
     }

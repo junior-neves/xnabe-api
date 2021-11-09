@@ -2,6 +2,8 @@
 
 namespace Unit\Services\Events;
 
+use App\DTO\Account\AccountDTO;
+use App\DTO\Event\EventReturnDTO;
 use App\Exceptions\Account\AccountNotFoundException;
 use App\Exceptions\Account\InsufficientBalanceException;
 use App\Mappers\Contracts\EventMapperInterface;
@@ -48,16 +50,15 @@ class TransferTest extends TestCase
         $dataReturn = $this->eventService->execute($eventDTO);
 
         $this->assertEquals(
-            [
-                'origin' => [
-                    'id' => 100,
-                    'balance' => 10
-                ],
-                'destination' => [
-                    'id' => 200,
-                    'balance' => 10
-                ]
-            ],
+            (new EventReturnDTO())
+                ->setOrigin(
+                    (new AccountDTO())
+                        ->setId(100)
+                        ->setBalance(10))
+                ->setDestination(
+                    (new AccountDTO())
+                        ->setId(200)
+                        ->setBalance(10)),
             $dataReturn
         );
     }
