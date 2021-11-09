@@ -11,15 +11,14 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class EventController
+class EventController extends BaseController
 {
-    protected JsonResponse $response;
     private EventFactory $eventFactory;
     private EventMapperInterface $eventMapper;
 
     public function __construct(EventFactory $eventFactory, EventMapperInterface $eventMapper)
     {
-        $this->response = new JsonResponse();
+        parent::__construct();
         $this->eventFactory = $eventFactory;
         $this->eventMapper = $eventMapper;
     }
@@ -36,9 +35,9 @@ class EventController
             $eventDTO = $this->eventMapper->map($request);
 
             $event = $this->eventFactory->factory($request['type']);
-            $data = $event->execute($eventDTO);
+            $eventReturn = $event->execute($eventDTO);
 
-            $this->response->setData($data);
+            $this->response->setData($eventReturn->toArray());
             return $this->response->setStatusCode(Response::HTTP_CREATED);
         } catch (
             AccountNotFoundException |

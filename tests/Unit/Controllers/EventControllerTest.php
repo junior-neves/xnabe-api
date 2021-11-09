@@ -3,7 +3,9 @@
 namespace Unit\Controllers;
 
 use App\Controllers\EventController;
+use App\DTO\Account\AccountDTO;
 use App\DTO\Event\EventDTO;
+use App\DTO\Event\EventReturnDTO;
 use App\Exceptions\Account\AccountNotFoundException;
 use App\Mappers\Contracts\EventMapperInterface;
 use App\Services\Contracts\EventInterface;
@@ -34,7 +36,7 @@ class EventControllerTest extends TestCase
 
         $this->request->initialize([], [
             'type' => 'deposit',
-            'destination' => 100,
+            'destination' => "100",
             'amount' => 10
         ], [], [], [], [], '{"type":"deposit", "destination":"100", "amount":10}');
     }
@@ -43,18 +45,19 @@ class EventControllerTest extends TestCase
     {
         $this->eventMapper->method('map')->willReturn(new EventDTO());
         $this->eventFactory->method('factory')->willReturn($this->event);
-        $this->event->method('execute')->willReturn([
-            'destination' => [
-                'id' => 100,
-                'balance' => 20
-            ]
-        ]);
+        $this->event->method('execute')->willReturn(
+            (new EventReturnDTO())
+                ->setDestination(
+                    (new AccountDTO())
+                        ->setId("100")
+                        ->setBalance(20))
+        );
 
         $this->response
             ->setData(
                 [
                     'destination' => [
-                        'id' => 100,
+                        'id' => "100",
                         'balance' => 20
                     ]
                 ]
