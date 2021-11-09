@@ -20,7 +20,6 @@
     "psr-4": {
       "Core\\": "src/core",
       "App\\": "src/app",
-      "App\\Repositories\\": "src/app/Repositories",
       "Tests\\": "tests/"
     }
   },
