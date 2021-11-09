@@ -28,8 +28,4 @@ jobs:
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
-      
-    - name: PHPUnit (php-actions)
-      uses: php-actions/phpunit@v3
-  
         
